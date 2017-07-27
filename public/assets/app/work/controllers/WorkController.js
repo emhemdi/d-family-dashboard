@@ -1,6 +1,8 @@
 angular.module('karizma.work')
+
     .controller('WorkController', ['$scope', '$http','$timeout','$q','ValidationService', 'Work','Comment', 'Language', 'pictureSizeFilter',
         function ($scope, $http,$timeout,$q,ValidationService, Work,Comment, Language, pictureSizeFilter) {
+
             
           
 

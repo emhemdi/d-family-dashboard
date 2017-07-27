@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 
     var schema = [
         {
@@ -255,7 +255,7 @@
             "delete": {},
             "addField": {}
         }
-    }, {
+    }, { 
         "className": "Language",
         "fields": {
             "objectId": {
@@ -434,7 +434,9 @@
             }
         }
     }, {
+
         "className": "Configuration",
+
         "fields": {
             "objectId": {
                 "type": "String"
@@ -448,6 +450,7 @@
             "ACL": {
                 "type": "ACL"
             },
+
             "whoAreWe": {
                 "type": "Pointer",
                 "targetClass": "Language"
@@ -468,6 +471,7 @@
             "teamHistory": {
                 "type": "Pointer",
                 "targetClass": "Language"
+
             }
         },
         "classLevelPermissions": {
