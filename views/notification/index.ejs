@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <h4 class="caption-subject bold font-red-flamingo"> الاشعارات</h4>
+                </div>
+            </div>
+            <div class="portlet-body" block-ui="ui">
+                <div class="alert alert-success" ng-show="success">
+                    تم الارسال بنجاح
+                </div>
+                <div class="alert alert-danger" ng-show="error">
+                    {{error}}
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label class="control-label">الرسالة</label>
+                        <input type="text" class="form-control" maxlength="100" ng-model="message" placeholder="نص الرسالة..." />
+                    </div>
+                    <button class="btn btn-primary" ng-click="send()">أرسل</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

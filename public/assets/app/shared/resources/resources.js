@@ -349,6 +349,48 @@
                 "addField": {}
             }
         }, {
+            "className": "Participation",
+            "fields": {
+                "objectId": {
+                    "type": "String"
+                },
+                "createdAt": {
+                    "type": "Date"
+                },
+                "updatedAt": {
+                    "type": "Date"
+                },
+                "ACL": {
+                    "type": "ACL"
+                },
+                "title": {
+                    "type": "Pointer",
+                    "targetClass": "Language"
+                },
+                "thumbnail": {
+                    "type": "String"
+                },
+                "user": {
+                    "type": "Pointer",
+                    "targetClass": "_User"
+                },
+                "video": {
+                    "type": "String"
+                }
+            },
+            "classLevelPermissions": {
+                "find": {
+                    "*": true
+                },
+                "get": {
+                    "*": true
+                },
+                "create": {},
+                "update": {},
+                "delete": {},
+                "addField": {}
+            }
+        }, {
         "className": "Comment",
         "fields": {
             "objectId": {
@@ -375,6 +417,57 @@
                 "type": "Pointer",
                 "targetClass": "Work"
 
+            }
+        },
+        "classLevelPermissions": {
+            "find": {
+                "*": true
+            },
+            "get": {
+                "*": true
+            },
+            "create": {},
+            "update": {},
+            "delete": {},
+            "addField": {
+                "*": true
+            }
+        }
+    }, {
+        "className": "Configuration",
+        "fields": {
+            "objectId": {
+                "type": "String"
+            },
+            "createdAt": {
+                "type": "Date"
+            },
+            "updatedAt": {
+                "type": "Date"
+            },
+            "ACL": {
+                "type": "ACL"
+            },
+            "whoAreWe": {
+                "type": "Pointer",
+                "targetClass": "Language"
+            },
+            "socialLinks": {
+                "type": "Object"
+            },
+            "email": {
+                "type": "String"
+            },
+            "whatsapp": {
+                "type": "String"
+            },
+            "aboutAppContent": {
+                "type": "Pointer",
+                "targetClass": "Language"
+            },
+            "teamHistory": {
+                "type": "Pointer",
+                "targetClass": "Language"
             }
         },
         "classLevelPermissions": {

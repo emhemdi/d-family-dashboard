@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-xs-12" block-ui="ui">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <h4 class="caption-subject bold font-red-flamingo"> صفحات التواصل الاجتماعي</h4>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form action="">
+                    <div class="form-group">
+                        <label class="control-label">فيسبوك</label>
+                        <input type="text" class="form-control" ng-model="config.socialLinks.facebook" placeholder="https://facebook.com/page" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">تويتر</label>
+                        <input type="text" class="form-control" ng-model="config.socialLinks.twitter" placeholder="https://twitter.com/username"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">انستغرام</label>
+                        <input type="text" class="form-control" ng-model="config.socialLinks.instagram" placeholder="https://instagram.com/username"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">يوتيوب</label>
+                        <input type="text" class="form-control" ng-model="config.socialLinks.youtubed" placeholder="https://youtube.com/user/username"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">البريد الالكتروني</label>
+                        <input type="text" class="form-control" ng-model="config.email" placeholder="" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">WhatsApp</label>
+                        <input type="text" class="form-control" ng-model="config.whatsapp" placeholder="" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <h4 class="caption-subject bold font-red-flamingo"> الواجهة</h4>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form action="">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label class="control-label">من نحن</label>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <bhg-language-selector></bhg-language-selector>
+                            </div>
+                        </div>
+                        <br/>
+                        <bhg-summernote model="config.whoAreWe" selected-language="selectedLanguage"></bhg-summernote>
+                    </div>
+
+                    <div class="form-group">
+                         <div class="row">
+                         <div class="col-xs-6">
+                        <label class="control-label">تاريخ الفريق</label>
+                        </div>
+                            <div class="col-xs-6 text-right">
+                                <bhg-language-selector></bhg-language-selector>
+                            </div>
+                        </div>
+                        <br/>
+                        <bhg-summernote model="config.teamHistory" selected-language="selectedLanguage"></bhg-summernote>
+                        </div>
+
+                    <div class="form-group">
+                         <div class="row">
+                         <div class="col-xs-6">
+                        <label class="control-label">عن التطبيق</label>
+                        </div>
+                            <div class="col-xs-6 text-right">
+                                <bhg-language-selector></bhg-language-selector>
+                            </div>
+                        </div>
+                        <br/>
+                        <bhg-summernote model="config.aboutAppContent" selected-language="selectedLanguage"></bhg-summernote>
+                        </div>
+                </form>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-circle" ng-click="save()">حفظ التغييرات</button>
+    </div>
+    <!-- /.modal -->
+</div>

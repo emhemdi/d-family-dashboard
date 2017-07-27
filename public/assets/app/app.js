@@ -14,7 +14,7 @@
         $('body').removeClass('login');
     }
 
-    angular.module('karizma', ['ngResource', 'ngRoute', 'ui.sortable', 'summernote', 'karizma.account', 'karizma.shared', 'karizma.home', 'karizma.album', 'karizma.user', 'karizma.new', 'karizma.work'])
+    angular.module('karizma', ['ngResource', 'ngRoute', 'ui.sortable', 'summernote', 'karizma.account', 'karizma.shared', 'karizma.home', 'karizma.album', 'karizma.user', 'karizma.new', 'karizma.work','karizma.configuration','karizma.notification'])
         .config(['$locationProvider', '$routeProvider', '$httpProvider',
             function ($locationProvider, $routeProvider, $httpProvider) {
                 $routeProvider

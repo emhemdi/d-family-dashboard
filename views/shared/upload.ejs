@@ -6,10 +6,10 @@
         <div ng-show="type==='image'" kr-square-image="{{item.thumbnail}}" ng-class="{idle:item.state === 'idle' || item.state === 'uploading'}"
             style="width:80px;height:80px">
         </div>
-        <div ng-show="type==='video'" ng-class="{idle:item.state === 'idle' || item.state === 'uploading'}" style="width:80px;height:80px">
+        <div ng-if="type==='video'" ng-class="{idle:item.state === 'idle' || item.state === 'uploading'}" style="width:80px;height:80px">
             <section class="video">
                 <video controls>
-                    <source src='' type="video/mp4">
+                    <source ng-if="item.video" src='{{item.video}}' type="video/mp4">
                 </video>
 
             </section>
@@ -17,7 +17,7 @@
 
         </div>
 
-        <div class="progress" ng-hide="item.url || item.state === 'uploaded' || item.state === 'error'">
+        <div class="progress" ng-hide="item.url || item.state === 'uploaded' || item.state === 'error'" style="margin-bottom: 0px;">
             <div class="progress-bar progress-bar-striped active progress-bar-success" ng-style="item.state === 'startUploaded'?{width:70 + '%'}:{width:0 + '%'}"></div>
         </div>
         <div class="fileUpload btn btn-xs btn-circle btn-outline btn-default" ng-disabled="uploading" ng-hide="multiple">

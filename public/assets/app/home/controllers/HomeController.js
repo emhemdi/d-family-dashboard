@@ -1,6 +1,6 @@
 angular.module('karizma.home')
-    .controller('HomeController', ['$scope', '$http', '$timeout', 'User', 'Installation',
-        function ($scope, $http, $timeout, User, Installation) {
+    .controller('HomeController', ['$scope', '$http', '$timeout', 'User', 'Installation','Work','Participation',
+        function ($scope, $http, $timeout, User, Installation,Work,Participation) {
             var currentYear = new Date().getFullYear();
             $scope.filters = {
                 year: currentYear
@@ -206,20 +206,20 @@ angular.module('karizma.home')
                 });
             };
 
-           /* var refreshTop10Places = function () {
+            var refreshTop10Works = function () {
                 $scope.top10UI.block();
 
-                Parse.Cloud.run('GetMostVisitedPlaces', {
+                Parse.Cloud.run('GetMostLikedWorks', {
                     startDate: $scope.startDate,
                     endDate: $scope.endDate
                 }, function (result) {
                     $scope.top10UI.unblock();
 
                     $timeout(function () {
-                        $scope.topPlaces = result;
+                        $scope.topWorks = result;
                     });
                 });
-            };*/
+            };
 
             var refresh = function () {
                 var userCountQuery = new User.Query();
@@ -229,22 +229,29 @@ angular.module('karizma.home')
                         $scope.usersCount = totalUsers;
                     });
                 });
-
-                /*var adsCountQuery = new PlaceAdvertise.Query();
-                addFilters(adsCountQuery);
-
-                adsCountQuery.count({
-                    useMasterKey: true
-                }).then(function (totalAds) {
+                var workCountQuery = new Work.Query();
+                addFilters(workCountQuery);
+                workCountQuery.count().then(function (total) {
                     $timeout(function () {
-                        $scope.adsCount = totalAds;
+                        $scope.workCount = total;
                     });
-                });*/
+                });
+
+                var participationCountQuery = new Participation.Query();
+                addFilters(participationCountQuery);
+
+                participationCountQuery.count({
+                    useMasterKey: true
+                }).then(function (total) {
+                    $timeout(function () {
+                        $scope.participationCount = total;
+                    });
+                });
 
                 refreshInstallationsChart();
                 refreshUsersChart();
                 refreshCategoriesSearchChart();
-                refreshTop10Places();
+                refreshTop10Works();
             };
 
             $scope.startDate = moment().startOf('week').toDate();

@@ -27,9 +27,9 @@ angular.module('karizma.shared')
                                 swal({
                                     title: "تم الحذف!",
                                     text: "تم حذف البيانات نهائيا",
-                                    type: "success",
-                                    confirmButtonClass: "btn-primary",
-                                    confirmButtonText: "أغلق"
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                    
                                 });
 
                                
@@ -39,8 +39,8 @@ angular.module('karizma.shared')
                                     title: "حدث خطأ!",
                                     text: "حدث خطأ أثناء حذف البيانات",
                                     type: "error",
-                                    confirmButtonClass: "red",
-                                    confirmButtonText: "أغلق"
+                                    timer: 2000,
+                                    showConfirmButton: false
                                 });
                             });
                         });

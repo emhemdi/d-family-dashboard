@@ -38,19 +38,36 @@
                                     </div>
                                     <div class="category-title row">
                                         <div class="col-xs-4" style="padding-right: 0px;">
-                                            <i class="fa fa-star {{item.rate > 0 ?'text-warning':''}} "></i><i class="fa fa-star {{item.rate > 1 ?'text-warning':''}}"></i>
-                                            <i class="fa fa-star {{item.rate > 2 ?'text-warning':''}}"></i><i class="fa fa-star {{item.rate > 3 ?'text-warning':''}}"></i>
-                                            <i class="fa fa-star {{item.rate > 4 ?'text-warning':''}}"></i>&nbsp;&nbsp;
+                                            <i class="fa fa-star {{item.rate > 0 ?'text-warning':''}} "></i><i class="fa fa-star {{item.rate > 1 ?'text-warning':''}}"></i><i class="fa fa-star {{item.rate > 2 ?'text-warning':''}}"></i><i class="fa fa-star {{item.rate > 3 ?'text-warning':''}}"></i><i class="fa fa-star {{item.rate > 4 ?'text-warning':''}}"></i>
                                         </div>
                                         <div class="col-xs-2">
-                                            <i class="fa fa-heart text-danger" aria-hidden="true">{{item.likes ? item.likes.length:0}}</i>&nbsp;&nbsp;
+                                            <i class="fa fa-heart text-danger" aria-hidden="true">&nbsp;{{item.likes ? item.likes.length:0}}</i>
                                         </div>
                                         <div class="col-xs-2">
-                                            <a data-toggle="modal" data-target="#comment-modal" ng-click="selectItem(item,true)"><i class="fa fa-commenting  " aria-hidden="true">{{item.nbrComments || 0}}</i></a>                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a data-toggle="modal" data-target="#comment-modal" ng-click="selectItem(item,true)"><i class="fa fa-commenting  " aria-hidden="true">&nbsp;{{item.nbrComments || 0}}</i></a>                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </div>
                                         <div class="col-xs-4" style="padding-left: 0px;">
-                                            <button type="button" data-toggle="modal" data-target="#work-modal" ng-click="selectItem(item)" class="btn btn-circle btn-default btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                            <button type="button" ng-click="delete(item)" class="btn btn-circle red btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <!--<button type="button" data-toggle="modal" data-target="#work-modal" ng-click="selectItem(item)" class="btn btn-circle btn-default btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                            <button type="button" ng-click="delete(item)" class="btn btn-circle red btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>-->
+                                            <div class="timeline-body-head-actions">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-circle green btn-outline
+
+                                        btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown"
+                                                        data-close-others="true"> الخيارات
+                                                                                <i class="fa fa-angle-down"></i>
+                                                                            </button>
+                                                    <ul class="dropdown-menu pull-right" role="menu">
+                                                        <li>
+                                                            <a data-toggle="modal" data-target="#work-modal" ng-click="selectItem(item)" href="javascript:;">تعديل </a>
+                                                        </li>
+                                                        <li>
+                                                            <a ng-click="delete(item)" href="javascript:;">حذف</a>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -58,13 +75,15 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
+             <kr-pager page="filters.page" page-size="filters.pageSize"></kr-pager>
         </div>
     </div>
 
-    <div class="modal fade" id="work-modal" data-backdrop="static" block-ui="modalUI" kr-modal="newModal">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="work-modal" data-backdrop="static" block-ui="modalUI" kr-modal="workModal">
+        <div class="modal-dialog " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()" style="margin-top:10px !important;"><span aria-hidden="true">&times;</span></button>
@@ -81,12 +100,12 @@
                     </div>
                     <form action="">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label class="control-label translateable">العنوان</label>
                                     <bhg-input model="selectedItem.title" selected-language="selectedLanguage"></bhg-input>
                                 </div>
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <label class="control-label">الصورة</label>
                                     <kr-file-upload name="imageUploader" queue="imagesQueue" allowed-extensions="jpg,jpeg,png,gif" display="inline" field-name="full"
                                         file-uploaded="fileUploaded(fileInfo, object)" file-removed="fileRemoved(fileInfo, index)"
@@ -94,14 +113,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">الفيديو</label>
-                                     <kr-file-upload name="videoUploader" queue="videoQueue" allowed-extensions="mp4" display="inline" type="video" file-uploaded="videoUploaded(fileInfo, object)"
-                                    file-removed="videoRemoved(fileInfo, index)" fail="uploadFail()"></kr-file-upload>
+                                    <kr-file-upload name="videoUploader" queue="videoQueue" allowed-extensions="mp4" display="inline" type="video" file-uploaded="videoUploaded(fileInfo, object)"
+                                        file-removed="videoRemoved(fileInfo, index)" fail="uploadFail()"></kr-file-upload>
                                 </div>
 
                             </div>
-                            <div class="col-sm-6">
-                               
-                            </div>
+                            
                         </div>
                     </form>
                 </div>

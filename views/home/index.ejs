@@ -30,15 +30,15 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat red">
             <div class="visual">
-                <i class="fa fa-bar-chart-o"></i>
+                <i class="fa fa-briefcase"></i>
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="12,5">{{categoriesSearchCount}}</span></div>
-                <div class="desc"> عملية بحث </div>
+                    <span data-counter="counterup" data-value="12,5">{{workCount=== undefined ? '...' : workCount}}</span></div>
+                <div class="desc">الاعمال</div>
             </div>
-            <a class="more" target="_self" href="#search-stats"> تفاصيل
-                <i class="m-icon-swapright m-icon-white"></i>
+            <a class="more" target="_self" href="/works"> تفاصيل
+                <i class=" m-icon-swapright m-icon-white"></i>
             </a>
         </div>
     </div>
@@ -65,10 +65,10 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="89">{{adsCount === undefined ? '...' : adsCount}}</span></div>
-                <div class="desc"> اعلان </div>
+                    <span data-counter="counterup" data-value="89">{{participationCount === undefined ? '...' : participationCount}}</span></div>
+                <div class="desc"> المشاركات </div>
             </div>
-            <a class="more" href="/ads"> View more
+            <a class="more" href="/participations"> تفاصيل
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
@@ -222,7 +222,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <h4 class="caption-subject bold font-red-flamingo">
-                        الأماكن الأكثر زيارة
+                        الاعمال الأكثر إعجابا
                     </h4>
                 </div>
             </div>

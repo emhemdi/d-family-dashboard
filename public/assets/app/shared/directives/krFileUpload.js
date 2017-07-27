@@ -66,7 +66,9 @@ angular.module('karizma.shared')
                 };
 
                 var setPreview = function (fileInfo) {
+                    
                     var extension = getFileExtension(fileInfo);
+                    
                     var isImage = extension && imageExtensions.indexOf(extension) >= 0 || (allowedExtensions && _.some(allowedExtensions, function (e) {
                         return imageExtensions.indexOf(e) >= 0;
                     }));
@@ -79,6 +81,20 @@ angular.module('karizma.shared')
                             reader.onloadend = function () {
                                 $timeout(function () {
                                     fileInfo.thumbnail = reader.result;
+                                });
+                            };
+                            reader.readAsDataURL(fileInfo.file);
+                        }
+                    }
+                    else if(extension=='mp4') {
+                        if (fileInfo.url) {
+                            fileInfo.video = fileInfo.url;
+                        } else {
+                            var reader = new FileReader();
+                            reader.onloadend = function () {
+                                $timeout(function () {
+                                    fileInfo.video = reader.result;
+                                    console.log(fileInfo.video);
                                 });
                             };
                             reader.readAsDataURL(fileInfo.file);

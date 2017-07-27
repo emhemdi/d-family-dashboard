@@ -1,6 +1,6 @@
 angular.module('karizma.work')
-    .controller('WorkController', ['$scope', '$http','$q','ValidationService', 'Work','Comment', 'Language', 'pictureSizeFilter',
-        function ($scope, $http,$q,ValidationService, Work,Comment, Language, pictureSizeFilter) {
+    .controller('WorkController', ['$scope', '$http','$timeout','$q','ValidationService', 'Work','Comment', 'Language', 'pictureSizeFilter',
+        function ($scope, $http,$timeout,$q,ValidationService, Work,Comment, Language, pictureSizeFilter) {
             
           
 
@@ -32,6 +32,13 @@ angular.module('karizma.work')
                     isArray: true
                 }
             };
+             var countQuery = new Work.Query();
+            countQuery.count().then(function (count) {
+                $scope.$broadcast('total-updated', {
+                    total: count,
+                    pageSize: $scope.filters.pageSize
+                });
+            });
 
             var refresh = function () {
                 var query = new Work.Query();
@@ -87,7 +94,7 @@ angular.module('karizma.work')
                         }];
                     
 
-                    $scope.imageUploader.refreshQueue($scope.imagesQueue);
+                    $scope.videoUploader.refreshQueue($scope.videoQueue);
                 }
 
                 $scope.selectedItem = item;
@@ -134,11 +141,11 @@ angular.module('karizma.work')
                         useMasterKey: true
                     }).then(function () {
                         $scope.modalUI.unblock();
-                        $scope.newModal.hide();
+                        $scope.workModal.hide();
                         refresh();
                     },function(errors){
                          $scope.modalUI.unblock();
-                        $scope.newModal.hide();
+                        $scope.workModal.hide();
                          swal({
                                     title: "حدث خطأ!",
                                     text: "حدث خطأ أثناء حفظ البيانات",
@@ -149,7 +156,7 @@ angular.module('karizma.work')
                     });
                 },function(errors){
                      $scope.modalUI.unblock();
-                        $scope.newModal.hide();
+                        $scope.workModal.hide();
                         swal({
                                     title: "حدث خطأ!",
                                     text: "حدث خطأ أثناء حفظ البيانات",
@@ -158,6 +165,52 @@ angular.module('karizma.work')
                                     confirmButtonText: "أغلق"
                                 });
                 });
+            };
+             $scope.delete = function (item) {
+               
+                swal({
+                            title: "هل أنت متأكد؟",
+                            
+                            showCancelButton: true,
+                            confirmButtonClass: "red",
+                            confirmButtonText: "نعم، احذف",
+                            cancelButtonText: "إلغاء",
+                            closeOnConfirm: false
+                        },
+                        function () {
+                            item.destroy({
+                                useMasterKey: true
+                            }).then(function (res) {
+                                
+
+                                 $timeout(function () {
+
+                                $scope.works = _.filter($scope.works, function (o) {
+                                    return o.id != item.id;
+                                });
+                               
+                            });
+                                
+                                swal({
+                                    title: "تم الحذف!",
+                                    text: "تم حذف البيانات نهائيا",
+                                    
+                                   timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                               
+
+                            }, function (res) {
+                                swal({
+                                    title: "حدث خطأ!",
+                                    text: "حدث خطأ أثناء حذف البيانات",
+                                    type: "error",
+                                   timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            });
+                        });
             };
 
             $scope.$watch('filters', refresh, true);
