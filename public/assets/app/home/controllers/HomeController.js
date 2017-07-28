@@ -170,38 +170,17 @@ angular.module('karizma.home')
                 });
             };
 
-            var refreshCategoriesSearchChart = function () {
-                $scope.categoriesSearchUI.block();
+            var refreshTop10Users = function () {
+               $scope.top10UI.block();
 
-                Parse.Cloud.run('GetCategoriesSearchStats', {
+                Parse.Cloud.run('GetMostUsers', {
                     startDate: $scope.startDate,
                     endDate: $scope.endDate
                 }, function (result) {
-                    $scope.categoriesSearchUI.unblock();
+                    $scope.top10UI.unblock();
 
                     $timeout(function () {
-                        $scope.categoriesSearchCount = result.count;
-                    });
-
-                    $.plot('#categories_search_statistics', [result.data], {
-                        series: {
-                            bars: {
-                                show: true,
-                                barWidth: 0.5,
-                                align: 'center',
-                                lineWidth: 0,
-                                shadowSize: 0
-                            }
-                        },
-                        xaxis: {
-                            mode: 'categories',
-                            tickLength: 0
-                        },
-                        grid: {
-                            tickColor: '#eee',
-                            borderColor: '#eee',
-                            borderWidth: 1
-                        }
+                        $scope.topUsers = result;
                     });
                 });
             };
@@ -237,9 +216,9 @@ angular.module('karizma.home')
                     });
                 });
 
-                var participationCountQuery = new Participation.Query();
+                var participationCountQuery = new Work.Query();
                 addFilters(participationCountQuery);
-
+                participationCountQuery.exists('user');
                 participationCountQuery.count({
                     useMasterKey: true
                 }).then(function (total) {
@@ -250,12 +229,12 @@ angular.module('karizma.home')
 
                 refreshInstallationsChart();
                 refreshUsersChart();
-                refreshCategoriesSearchChart();
+               refreshTop10Users();
                 refreshTop10Works();
             };
 
-            $scope.startDate = moment().startOf('week').toDate();
-            $scope.endDate = moment().endOf('week').toDate();
+            $scope.startDate = moment().startOf('year').toDate();
+            $scope.endDate = moment().endOf('year').toDate();
 
             $scope.years = _.chain(_.range(1, 5)).map(function (n) {
                 return currentYear - n;
@@ -280,10 +259,11 @@ angular.module('karizma.home')
                 'أمس': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                 'هذا الأسبوع': [moment().startOf('week'), moment().endOf('week')],
                 'هذا الشهر': [moment().startOf('month'), moment().endOf('month')],
-                'الشهر الفارط': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                'الشهر الفارط': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'هذه السنة': [moment().startOf('year'), moment().endOf('year')]
             };
 
-            $scope.selectedRange = 'هذا الأسبوع';
+            $scope.selectedRange = 'هذه السنة';
 
             $scope.$watch('startDate', function () {
                 refresh();

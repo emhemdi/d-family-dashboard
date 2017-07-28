@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <h4 class="caption-subject bold font-red-flamingo"> {{work.title.arabicLabel}}</h4>
+                </div>
+               
+            </div>
+            <div class="portlet-body" block-ui="ui">
+                
+                <div class="row">
+                    <div class="col-md-4 col-xs-6" >
+                        <div class="category-widget" style="min-height:470px">
+                            <div class="category-widget-head">
+                                <section class="video">
+                                    <video poster="{{work.thumbnail}}" controls>
+                                        <source src='{{work.video}}' type="video/mp4">
+                                    </video>
+
+                                </section>
+                            </div>
+                            <div class="category-widget-body">
+                                <div style="min-height: 130px;">
+                                    <h4 class="event-title" style="white-space: normal;"> {{work.title.arabicLabel}} </h4>
+
+                                    <div class="event-date">
+                                        <i class="fa fa-calendar font-green"></i> <span>{{work.createdAt | moment:'format':'dddd D MMMM YYYY'}}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="event-buttons">
+
+                                    </div>
+                                    <div class="category-title row">
+                                        <div class="col-xs-6" style="padding-right: 0px;">
+                                            <i class="fa fa-star {{work.rate > 0 ?'text-warning':''}} "></i><i class="fa fa-star {{work.rate > 1 ?'text-warning':''}}"></i><i class="fa fa-star {{work.rate > 2 ?'text-warning':''}}"></i><i class="fa fa-star {{work.rate > 3 ?'text-warning':''}}"></i><i class="fa fa-star {{work.rate > 4 ?'text-warning':''}}"></i>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <i class="fa fa-heart text-danger" aria-hidden="true">&nbsp;{{work.likes ? work.likes.length:0}}</i>
+                                        </div>
+                                        <div class="col-xs-2">
+
+                                            <a data-toggle="modal" data-target="#comment-modal" ng-click="selectItem(work,true)"><i class="fa fa-commenting  " aria-hidden="true">&nbsp;{{work.nbrComments || 0}}</i></a>                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+             <kr-pager page="filters.page" page-size="filters.pageSize"></kr-pager>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="comment-modal" kr-modal="newModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()" style="margin-top:10px !important;"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title inline-block">{{selectedItem.title | language:selectedLanguage}}</h4>
+
+                </div>
+                <div class="modal-body">
+                    <div class="portlet-body">
+                        <div class="timeline">
+                            <!-- TIMELINE ITEM -->
+                            <div class="timeline-item" ng-repeat="item in comments">
+                                <div class="timeline-badge">
+                                    <div ng-show="item.user.photo">
+
+                                        <img class="timeline-badge-userpic" src="{{item.user.photo}}" />
+                                    </div>
+                                    <div ng-show="!item.user.photo" class="timeline-icon">
+                                        <i class="icon-user-following font-green-haze"></i>
+                                    </div>
+                                </div>
+                                <div class="timeline-body">
+                                    <div class="timeline-body-arrow"> </div>
+                                    <div class="timeline-body-head">
+                                        <div class="timeline-body-head-caption">
+                                            <span class="timeline-body-alerttitle font-red-intense">{{item.user.fullName}}</span>
+                                            <span class="timeline-body-time font-grey-cascade"><i class="fa fa-calendar font-green"></i> <span>{{item.createdAt | moment:'format':'dddd D MMMM YYYY'}}</span></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="timeline-body-content">
+                                        <span class="font-grey-cascade"> {{item.comment}}
+                                                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END TIMELINE ITEM -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>

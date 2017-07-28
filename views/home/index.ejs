@@ -61,14 +61,14 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat purple">
             <div class="visual">
-                <i class="fa fa-bullhorn"></i>
+                <i class="fa fa-share-alt "></i>
             </div>
             <div class="details">
                 <div class="number">
                     <span data-counter="counterup" data-value="89">{{participationCount === undefined ? '...' : participationCount}}</span></div>
                 <div class="desc"> المشاركات </div>
             </div>
-            <a class="more" href="/participations"> تفاصيل
+            <a class="more" href="/participation"> تفاصيل
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
@@ -191,25 +191,28 @@
             <div class="portlet-title">
                 <div class="caption">
                     <h4 class="caption-subject bold font-red-flamingo">
-                        إحصائيات تصفح التصنيفات
+                          المستخدمين الاكثر مشاركة
                     </h4>
                 </div>
             </div>
-            <div class="portlet-body" block-ui="categoriesSearchUI">
-                <div id="categories_search_statistics" class="chart categories-chart"> </div>
-                <div class="row">
-                    <div class="col-xs-4">
-                        <div class="dashboard-stat2 ">
-                            <div class="display">
-                                <div class="number">
-                                    <h3 class="font-blue-sharp">
-                                        <span data-counter="counterup">{{categoriesSearchCount}}</span>
-                                    </h3>
-                                    <small>عملية بحث</small>
-                                </div>
-                                <div class="icon">
-                                    <i class="icon-magnifier"></i>
-                                </div>
+            <div class="portlet-body" block-ui="top10UserUI">
+                <div class="mt-comments">
+                    <div class="mt-comment" ng-repeat="item in topUsers">
+                        <div class="mt-comment-img">
+                            <div kr-square-image="{{item[0].photo}}" style="width:40px;height:40px;"></div>
+                        </div>
+                        <div class="mt-comment-body">
+                            <div class="mt-comment-info">
+                                <span class="mt-comment-author">{{item[0].fullName}}</span>
+                               
+                            </div>
+                            <div class="mt-comment-details">
+                               <i class="fa fa-share-alt text-danger" aria-hidden="true">&nbsp;{{item[1] }}</i>
+                                <ul class="mt-comment-actions">
+                                    <li>
+                                        <a href="/users/{{item[0].id}}">تفصايل</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -228,20 +231,20 @@
             </div>
             <div class="portlet-body" block-ui="top10UI">
                 <div class="mt-comments">
-                    <div class="mt-comment" ng-repeat="item in topPlaces">
+                    <div class="mt-comment" ng-repeat="item in topWorks">
                         <div class="mt-comment-img">
-                            <div kr-square-image="{{item.place.images[0] | pictureSize:'s'}}" style="width:40px;height:40px;"></div>
+                            <div kr-square-image="{{item.thumbnail}}" style="width:40px;height:40px;"></div>
                         </div>
                         <div class="mt-comment-body">
                             <div class="mt-comment-info">
-                                <span class="mt-comment-author">{{item.place.name.arabicLabel}}</span>
-                                <span class="mt-comment-date">{{item.place.category.name.arabicLabel}}</span>
+                                <span class="mt-comment-author">{{item.title.arabicLabel}}</span>
+                               
                             </div>
                             <div class="mt-comment-details">
-                                <span class="mt-comment-status mt-comment-status-pending">{{item.count}} عملية بحث</span>
+                               <i class="fa fa-heart text-danger" aria-hidden="true">&nbsp;{{item.likes ? item.likes.length:0}}</i>
                                 <ul class="mt-comment-actions">
                                     <li>
-                                        <a href="/places/{{item.place.id}}">تفصايل</a>
+                                        <a href="/works/{{item.id}}">تفصايل</a>
                                     </li>
                                 </ul>
                             </div>
@@ -254,3 +257,4 @@
 </div>
 <div class="clearfix"></div>
 <!-- END DASHBOARD STATS 1-->
+  

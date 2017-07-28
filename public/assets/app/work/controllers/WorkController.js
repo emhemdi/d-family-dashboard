@@ -1,7 +1,7 @@
 angular.module('karizma.work')
 
-    .controller('WorkController', ['$scope', '$http','$timeout','$q','ValidationService', 'Work','Comment', 'Language', 'pictureSizeFilter',
-        function ($scope, $http,$timeout,$q,ValidationService, Work,Comment, Language, pictureSizeFilter) {
+    .controller('WorkController', ['$scope', '$http','$timeout','$route','$q','ValidationService', 'Work','Comment', 'Language', 'pictureSizeFilter',
+        function ($scope, $http,$timeout,$route,$q,ValidationService, Work,Comment, Language, pictureSizeFilter) {
 
             
           
@@ -10,7 +10,7 @@ angular.module('karizma.work')
                 page: 1,
                 pageSize: 12,
             };
-
+            
             $scope.imagesQueue = [];
             var validationRules = {
                
